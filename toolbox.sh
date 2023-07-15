@@ -15,7 +15,7 @@ echo "Note: Use with caution and ensure compatibility with your Kali Linux versi
 echo ""
 
 # Update package lists
-sudo apt-get update > /dev/null
+sudo apt update > /dev/null
 
 # Function to check if a package is installed
 is_installed() {
