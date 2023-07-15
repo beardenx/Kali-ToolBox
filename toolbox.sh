@@ -63,7 +63,7 @@ is_spiderfoot_installed() {
 install_script() {
     sudo cp MassNmap.sh /usr/bin/
     sudo chmod +x /usr/bin/MassNmap.sh
-    echo -e "${GREEN}MassNmap has been added to /usr/bin.${NC}"
+    echo -e "${GREEN}Successfully installed MassNmap ${NC}"
 }
 
 install_spiderfoot() {
@@ -77,6 +77,8 @@ install_spiderfoot() {
 
     # Install the required dependencies
     cd spiderfoot-4.0 && pip3 install -r requirements.txt > /dev/null
+
+    echo -e "${GREEN}Successfully installed Spiderfoot${NC}"
 }
 
 # Install packages
