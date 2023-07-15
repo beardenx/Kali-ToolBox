@@ -41,6 +41,22 @@ install_package() {
     fi
 }
 
+# Function to check if a script is installed
+is_script_installed() {
+    if [ -f "/usr/bin/MassNmap.sh" ]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+# Function to install MassNmap
+install_script() {
+    sudo cp MassNmap.sh /usr/bin/
+    sudo chmod +x /usr/bin/MassNmap.sh
+    echo -e "${GREEN}MassNmap has been added to /usr/bin.${NC}"
+}
+
 # Install packages
 failed_packages=()
 install_package "nmap" || failed_packages+=("nmap")
@@ -55,6 +71,12 @@ install_package "sslscan" || failed_packages+=("sslscan")
 install_package "masscan" || failed_packages+=("masscan")
 install_package "amass" || failed_packages+=("amass")
 
+# Check if your script is already installed
+if is_script_installed; then
+    echo "- MassNmap is already installed."
+else
+    install_script
+fi
 
 # Check if all installations are done
 if [ ${#failed_packages[@]} -eq 0 ]; then
