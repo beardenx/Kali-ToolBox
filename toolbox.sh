@@ -6,8 +6,9 @@ RED='\033[0;31m'
 NC='\033[0m' # No Color
 
 #  Display script description banner
-echo -e "${GREEN}Kali ToolBox${NC}"
-echo "Developed by beardenx v0.1"
+echo
+echo -e "${GREEN}Kali ToolBox${NC} - Script by beardenx v0.1"
+echo -e "--------------------------------------"
 echo
 echo "This script automates the installation of commonly used tools in Kali Linux."
 echo "It checks if the tools are already installed and installs them if necessary."
@@ -15,7 +16,7 @@ echo "Note: Use with caution and ensure compatibility with your Kali Linux versi
 echo ""
 
 # Update package lists
-sudo apt update > /dev/null
+sudo apt update > /dev/null 2>&1
 
 # Function to check if a package is installed
 is_installed() {
@@ -94,6 +95,15 @@ install_package "testssl.sh" || failed_packages+=("testssl.sh")
 install_package "sslscan" || failed_packages+=("sslscan")
 install_package "masscan" || failed_packages+=("masscan")
 install_package "amass" || failed_packages+=("amass")
+install_package "gobuster" || failed_packages+=("gobuster")
+install_package "dirbuster" || failed_packages+=("dirbuster")
+install_package "wpscan" || failed_packages+=("wpscan")
+install_package "joomscan" || failed_packages+=("joomscan")
+install_package "wafw00f" || failed_packages+=("wafw00f")
+install_package "sqlmap" || failed_packages+=("sqlmap")
+install_package "aircrack-ng" || failed_packages+=("aircrack-ng")
+install_package "wfuzz" || failed_packages+=("wfuzz")
+
 
 # Check if MassNmap is already installed
 if is_script_installed; then
