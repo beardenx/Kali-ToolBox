@@ -3,5 +3,5 @@
 
 # Usage
 
-chmod +x requirement.sh
-sudo ./toolbox.sh
+- chmod +x requirement.sh
+- sudo ./toolbox.sh
