@@ -4,4 +4,4 @@
 # Usage
 
 - chmod +x requirement.sh
-- sudo ./toolbox.sh
+- sudo ./requirement.sh && sudo ./toolbox.sh
