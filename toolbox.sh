@@ -52,12 +52,13 @@ is_script_installed() {
 }
 
 is_spiderfoot_installed() {
-    if (cd spiderfoot-4.0 && python3 sf.py -h) &>/dev/null; then
+    if command -v spiderfoot &>/dev/null; then
         return 0
     else
         return 1
     fi
 }
+
 
 
 # Function to install MassNmap
@@ -69,18 +70,27 @@ install_script() {
 
 install_spiderfoot() {
     # Download SpiderFoot
-    sudo wget -q https://github.com/smicallef/spiderfoot/archive/v4.0.tar.gz > /dev/null
+    sudo wget -q "https://github.com/smicallef/spiderfoot/archive/v4.0.tar.gz" -O spiderfoot.tar.gz
 
     # Extract the downloaded archive
-    sudo tar zxf v4.0.tar.gz -C . > /dev/null
-    sudo rm v4.0.tar.gz > /dev/null
+    sudo tar zxf spiderfoot.tar.gz
 
+    # Move the SpiderFoot directory to /opt
+    sudo mv spiderfoot-4.0 /opt/spiderfoot
 
     # Install the required dependencies
-    cd spiderfoot-4.0 && pip3 install -r requirements.txt > /dev/null
+    sudo apt install python3-pip > /dev/null 2>&1
+    pip3 install -r /opt/spiderfoot/requirements.txt > /dev/null
 
-    echo -e "${GREEN}Successfully installed Spiderfoot${NC}"
+    # Create a symbolic link to sf.py in /usr/bin
+    sudo ln -s /opt/spiderfoot/sf.py /usr/bin/spiderfoot
+
+    # Clean up the downloaded archive
+    sudo rm spiderfoot.tar.gz
+
+    echo -e "${GREEN}Successfully installed SpiderFoot.${NC}"
 }
+
 
 # Install packages
 failed_packages=()
