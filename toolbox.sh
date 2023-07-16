@@ -5,9 +5,29 @@ GREEN='\033[0;32m'
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 
+# Function to read the current version number from the version.txt file
+get_version_number() {
+    cat version.txt
+}
+
+# Function to increment the version number and update it in the version.txt file
+increment_version_number() {
+    sudo apt install bc >/dev/null 2>&1
+    current_version=$(get_version_number)
+    major=$(echo "$current_version" | cut -d'.' -f1)
+    minor=$(echo "$current_version" | cut -d'.' -f2)
+    new_minor=$((minor + 1))
+    new_version="$major.$new_minor"
+    echo "$new_version" > version.txt
+    echo "$new_version"
+}
+
+
 #  Display script description banner
+version=$(increment_version_number)
 echo
-echo -e "${GREEN}Kali ToolBox${NC} - Script by beardenx v0.1"
+echo -e "${GREEN}Kali ToolBox${NC}  : Script by beardenx $version"
+echo -e "${GREEN}Latest Update${NC} : $(date +'%Y-%m-%d')"
 echo -e "--------------------------------------"
 echo
 echo "This script automates the installation of commonly used tools in Kali Linux."
